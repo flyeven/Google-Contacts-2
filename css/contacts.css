@@ -81,7 +81,7 @@ header * {
 }
 
 .back-btn-padding{
-	padding:10px 0px 30px 100px;
+	padding:10px 30px 30px 100px;
 }
 
 .field-data{
@@ -132,3 +132,7 @@ header * {
 	display: none;
 }
 /* customize mdl */
+
+.mdl-data-table th{
+	text-align: left;
+}

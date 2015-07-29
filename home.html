@@ -4,11 +4,11 @@
 
 	<!-- Material Design Lite -->
 	
-	 <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.indigo-blue.min.css" /> 
+	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.indigo-blue.min.css" /> 
 	<!-- Material Design icon font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="css/contacts.css">
-	
+
 	<script src="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.min.js"></script>
 	<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-route.min.js" ></script>
@@ -74,36 +74,36 @@
 
 	<modal-overlay  ng-show="OverlayShowHide.isCurrentViewState(OverlayShowHide.viewState.contactView)" >
 	<form class="back-btn-padding">
-			<h3>{{MyDataService.selectedContact.firstName + " " + MyDataService.selectedContact.lastName}} </h3>
-			<div class="field-data">
-				<span class="field-title"> First Name  </span>
-				<span class="field-value">: {{MyDataService.selectedContact.firstName}}</span>
+		<h3>{{MyDataService.selectedContact.firstName + " " + MyDataService.selectedContact.lastName}} </h3>
+		<div class="field-data">
+			<span class="field-title"> First Name  </span>
+			<span class="field-value">: {{MyDataService.selectedContact.firstName}}</span>
+		</div>
+		<div class="field-data">
+			<span class="field-title"> Last Name </span>
+			<span class="field-value">: {{MyDataService.selectedContact.lastName}}</span>
+		</div>
+		<div class="field-data">
+			<span class="field-title"> Primary Email Id </span>
+			<span class="field-value">: {{MyDataService.selectedContact.loginEmail}}</span>
+		</div>
+		<div class="field-data">
+			<span class="field-title"> Other Email Id </span>
+			<div  class="field-data" ng-repeat="emailId in MyDataService.selectedContact.emailIds">
+				<span class="field-title-2"> {{emailId.type}}</span>
+				<span class="field-value">: {{emailId.value}}</span>
 			</div>
-			<div class="field-data">
-				<span class="field-title"> Last Name </span>
-				<span class="field-value">: {{MyDataService.selectedContact.lastName}}</span>
+		</div>
+		<div class="field-data">
+			<span class="field-title"> Contact No.</span>
+
+			<div  class="field-data" ng-repeat="contactNumber in MyDataService.selectedContact.contactNumbers">
+				<span class="field-title-2"> {{contactNumber.type}}</span>
+				<span class="field-value">: {{contactNumber.value}}</span>
 			</div>
-			<div class="field-data">
-				<span class="field-title"> Primary Email Id </span>
-				<span class="field-value">: {{MyDataService.selectedContact.loginEmail}}</span>
-			</div>
-			<div class="field-data">
-				<span class="field-title"> Other Email Id </span>
-				<div  class="field-data" ng-repeat="emailId in MyDataService.selectedContact.emailIds">
-					<span class="field-title-2"> {{emailId.type}}</span>
-					<span class="field-value">: {{emailId.value}}</span>
-				</div>
-			</div>
-			<div class="field-data">
-				<span class="field-title"> Contact No.</span>
-				
-				<div  class="field-data" ng-repeat="contactNumber in MyDataService.selectedContact.contactNumbers">
-					<span class="field-title-2"> {{contactNumber.type}}</span>
-					<span class="field-value">: {{contactNumber.value}}</span>
-				</div>
-			</div>
-		</form>
-	</modal-overlay>
+		</div>
+	</form>
+</modal-overlay>
 </div>
 <!-- add group popup-->
 <div ng-controller="GroupsController">
@@ -117,12 +117,37 @@
 		<input type="submit" ng-disabled="newGroup.$pristine || newGroup.$invalid" value="Add" />
 	</form>
 </modal-overlay>
-<modal-overlay ng-show="OverlayShowHide.isCurrentViewState(OverlayShowHide.viewState.groupEdit)">
-	<form class="back-btn-padding">
-		<h3>{{MyDataService.selectedGroup.groupName}}</h3>
-	</form>
+<modal-overlay ng-if="MyDataService.selectedGroup" ng-show="OverlayShowHide.isCurrentViewState(OverlayShowHide.viewState.groupEdit)">
+<form class="back-btn-padding">
+	<h3>{{MyDataService.selectedGroup.groupName}} - Members</h3>
+
+	<table id="group-members" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp contacts-table">
+
+		<thead>
+			<tr class="mdl-data-table__cell--non-numeric" >
+				<th class="mdl-data-table__cell--non-numeric"></th>
+				<th class="mdl-data-table__cell--non-numeric">Name</th>
+				<th class="mdl-data-table__cell--non-numeric">Email Id</th>
+				<th class="mdl-data-table__cell--non-numeric">Contact No.</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr class="mdl-data-table__cell--non-numeric" ng-repeat="contact in MyDataService.contacts[2].contacts"  >
+				<td><input type="checkbox" ng-checked="MyDataService.isMemberOfGroup(contact.contactId)" data-contact="{{ contact | json}}" /></td>
+				<td class="mdl-data-table__cell--non-numeric">{{ contact.firstName + " " + contact.lastName }}</td>
+				<td class="mdl-data-table__cell--non-numeric">{{ contact.loginEmail }}</td>
+				<td class="mdl-data-table__cell--non-numeric">{{ contact.contactNumbers[0].value }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<!-- Accent-colored raised button with ripple -->
+<button ng-click="saveGroupMembers()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+  Save
+</button>
+</form>
 </modal-overlay>
 </div>
-
 </body>
 </html>

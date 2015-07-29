@@ -2,7 +2,8 @@
 	<h6>{{group.groupName}}</h6>
 
 	<table  class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp contacts-table">
-	<tr ng-repeat="member in group.members" ng-click="openViewContactPopup(member)">
+	<tr ng-repeat="member in group.members" ng-click="openViewContactPopup(member)" >
+		
 		<td class="mdl-data-table__cell--non-numeric">{{ member.firstName + " " + member.lastName }}</td>
 		<td class="mdl-data-table__cell--non-numeric">{{ member.loginEmail }}</td>
 		<td class="mdl-data-table__cell--non-numeric">{{ member.contactNumbers[0].value }}</td>

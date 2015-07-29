@@ -162,18 +162,19 @@
 				contactNumbers : [{ type: "home" , value:  "7834231323"}]
 			},
 			{
-				contactId : "2",
+				contactId : "3",
 				favourite: true,
-				firstName : "Karan",
-				lastName : "Solanki",
-				loginEmail : "Karan@gmail.com",
-				emailIds : [{ type: "home" , value:  "Karan@gmail.com" }],
-				contactNumbers : [{ type: "home" , value:  "7834231323"}]
+				firstName : "Dhaval",
+				lastName : "Zala",
+				loginEmail : "Dhaval@gmail.com",
+				emailIds : [{ type: "home" , value:  "Dhaval@gmail.com" }],
+				contactNumbers : [{ type: "home" , value:  "7834231324"}]
 			}]
 		}
 		];
 
 		this.groups = [{
+			groupId: 1,
 			groupName: "Friends",
 			members: [{
 				contactId : "1",
@@ -194,8 +195,8 @@
 				contactNumbers : [{ type: "home" , value:  "7834231323"}]
 			}]
 		},
-
 		{
+			groupId: 2,
 			groupName: "Collegues",
 			members: [{
 				contactId : "1",
@@ -220,13 +221,26 @@
 		}
 
 		this.addGroup = function(group){
+			group.members = [];
 			this.groups.push(angular.copy(group));
 		}
 
 		this.getGroups = function(){
 			return this.groups;
 		}
+
+		this.saveGroupMembers = function(members){
+			this.selectedGroup.members = members;
+		}
+
+		this.isMemberOfGroup = function(memberId){
+			for (var i = 0; i < this.selectedGroup.members.length; i++) {
+				if(this.selectedGroup.members[i].contactId === memberId){
+					return true;
+				}
+			};
+
+			return false;
+		}
 	}]);
-
-
 })();

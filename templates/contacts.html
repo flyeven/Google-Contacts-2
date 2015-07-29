@@ -1,6 +1,5 @@
 <div ng-repeat="contactCategory in contacts" class="table-content">
 	<h6>{{contactCategory.header}}</h6>
-	{{ id}}
 	<table  class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp contacts-table">
 		<tr ng-repeat="contact in contactCategory.contacts" ng-click="openViewContactPopup(contact)">
 			<td class="mdl-data-table__cell--non-numeric">{{ contact.firstName + " " + contact.lastName }}</td>
@@ -11,6 +10,6 @@
 </div>
 
 <!-- Colored mini FAB button -->
-	<button ng-click="openAddContactPopup()" ng-show="!isNewContact" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored add-btn">
+	<button ng-click="openAddContactPopup()"  class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored add-btn">
 		<i class="material-icons">add</i>
 	</button>

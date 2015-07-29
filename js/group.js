@@ -19,8 +19,20 @@
 		};
 
 		$scope.openAddMemberPopup = function(group){
-			OverlayShowHide.setCurrentViewState(OverlayShowHide.viewState.groupEdit);
 			MyDataService.selectedGroup = group;
+			OverlayShowHide.setCurrentViewState(OverlayShowHide.viewState.groupEdit);
+			
+		};
+
+		$scope.saveGroupMembers = function(){
+			 var selectedRows = document.querySelectorAll("#group-members tr input[type='checkbox']:checked"),
+				members = [];
+			for (var i = 0; i < selectedRows.length; i++) {
+				members.push(JSON.parse(selectedRows[i].getAttribute("data-contact")));
+			};
+
+			MyDataService.saveGroupMembers(members);
+			$scope.closeAddGroupPopup();
 		}
 	}]);
 })();
