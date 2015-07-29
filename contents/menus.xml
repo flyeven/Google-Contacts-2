@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus>
+	<menu header="All Contacts"></menu>
+	<menu header="Frequently contacted"></menu>
+	<menu header="Groups"></menu>
+	<menu header="Circles"></menu>
+	<menu header="Find duplicates"></menu>
+	<menu header="More 1"></menu>
+	<menu header="More 2"></menu>
+</menus>
